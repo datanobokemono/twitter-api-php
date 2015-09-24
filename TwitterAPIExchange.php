@@ -295,6 +295,13 @@ class TwitterAPIExchange
         }
 
         $feed = curl_init();
+
+        $cert_path = dirname(__FILE__) . "\\twitter.crt";
+        
+        curl_setopt($feed, CURLOPT_SSL_VERIFYPEER, False);
+        curl_setopt($feed, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($feed, CURLOPT_CAINFO, $cert_path);
+
         curl_setopt_array($feed, $options);
         $json = curl_exec($feed);
 
